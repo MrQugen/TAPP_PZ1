@@ -1,0 +1,91 @@
+<!doctype HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/section_top.css">
+    <link rel="stylesheet" type="text/css" href="/css/components.css">
+    <link rel="stylesheet" type="text/css" href="/css/header-page.css">
+    <link rel="stylesheet" type="text/css" href="/css/section-about.css">
+    <link rel="stylesheet" type="text/css" href="/css/section-contacts.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer-page.css">
+    <link rel="stylesheet" type="text/css" href="/css/popup.css">
+    <link rel="stylesheet" type="text/css" href="/css/slider.css">
+    <link rel="stylesheet" type="text/css" href="/css/accordion.css">
+    <link rel="stylesheet" type="text/css" href="/css/tabs.css">
+
+    <script src="https://kit.fontawesome.com/d80ef6008c.js" crossorigin="anonymous"></script>
+
+
+    <title>Crazy fish</title>
+</head>
+<body>
+
+<style>
+    .blackiconcolor{
+        color: white;
+    }
+    .blackiconcolor:hover{
+        color: #d43c8c;
+    }
+
+</style>
+
+<!-- header-page -->
+<header class="header-page">
+    <div class="container header-page_container">
+        <div class="header-page_start "><div class="logo">
+            <!-- <img class="logo" src="img/logo_cm.png" width="7%" height="7%" alt="Логотип crazy fish"> -->
+            <span class="header-page_logo">Crazy Fish</span>
+        </div>
+        </div>
+        <div class="header-page_end">
+            <nav class="header-page_nav">
+                <ul class="header-page_ul">
+                    <li class="header-page_li">
+                        <a class="header-page_link" href="/" data-scroll-to="section-catalog">
+                            <span class="header-page_text">Главная страница</span>
+                        </a>
+                    </li>
+                    <li class="header-page_li">
+                        <a class="header-page_link" href="/admin/edit-bait" data-scroll-to="section-about">
+                            <span class="header-page_text" >Редактировать товары</span>
+                        </a>
+                    </li>
+                    <li class="header-page_li">
+                        <a class="header-page_link" href="/admin/admin-orders" data-scroll-to="section-contacts">
+                            <span class="header-page_text">Заказы</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div sec:authorize="isAuthenticated()" class="header-page_li">
+                <a class="header-page_icon" href="/cabinet/personal-information">
+                    <i class="fas fa-user-circle fa-lg blackiconcolor"></i>
+                </a>
+            </div>
+            <div sec:authorize="isAuthenticated()" class="header-page_li">
+                <a class="header-page_icon" href="#">
+                    <i class="fas fa-shopping-basket fa-lg blackiconcolor"></i>
+                </a>
+            </div>
+            <div sec:authorize="hasRole('ADMIN')" class="header-page_li">
+                <a class="header-page_icon blackiconcolor" href="/admin/edit-bait">
+                    <i class="fas fa-cog fa-lg"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- /.header-page -->
+
+<h6><div>Hello, Admin home!</div></h6>
+
+
+
+<script type="text/javascript" src="JavaScript/project.js" defer></script>
+
+</body>
+</html>

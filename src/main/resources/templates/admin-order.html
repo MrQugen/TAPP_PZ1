@@ -1,0 +1,234 @@
+<!doctype HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/section_top.css">
+    <link rel="stylesheet" type="text/css" href="/css/components.css">
+    <link rel="stylesheet" type="text/css" href="/css/header-page.css">
+    <link rel="stylesheet" type="text/css" href="/css/section-about.css">
+    <link rel="stylesheet" type="text/css" href="/css/section-contacts.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer-page.css">
+    <link rel="stylesheet" type="text/css" href="/css/popup.css">
+    <link rel="stylesheet" type="text/css" href="/css/slider.css">
+    <link rel="stylesheet" type="text/css" href="/css/accordion.css">
+    <link rel="stylesheet" type="text/css" href="/css/tabs.css">
+
+    <script src="https://kit.fontawesome.com/d80ef6008c.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+
+    <title>Crazy fish</title>
+</head>
+<body>
+<style>
+    .blackiconcolor{
+        color: white;
+    }
+    .blackiconcolor:hover{
+        color: #d43c8c;
+    }
+
+    .col-2 {
+        flex: 0 0 auto;
+        width: 11.3%;
+    }
+    .cabinet_btn{
+        box-shadow: none;
+        background: #a72d6c;
+        width: 168px;
+        padding: 10px 20px;
+        border-radius: 7px;
+        font-size: 15px;
+        font-weight: 700;
+        color: white;
+        margin-top: 24px;
+        height: 45px;
+    }
+    .cabinet_btn:hover{
+        background: #d43c8c;
+        color: white;
+    }
+    .form-select {
+        height: 45px;
+    }
+</style>
+<!-- header-page -->
+<header class="header-page">
+    <div class="container header-page_container">
+        <div class="header-page_start "><div class="logo">
+            <!-- <img class="logo" src="img/logo_cm.png" width="7%" height="7%" alt="Логотип crazy fish"> -->
+            <span class="header-page_logo">Crazy Fish</span>
+        </div>
+        </div>
+        <div class="header-page_end">
+            <nav class="header-page_nav">
+                <ul class="header-page_ul">
+                    <li class="header-page_li">
+                        <a class="header-page_link" href="/" data-scroll-to="section-catalog">
+                            <span class="header-page_text">Главная страница</span>
+                        </a>
+                    </li>
+                    <li class="header-page_li">
+                        <a class="header-page_link" href="/admin/edit-bait" data-scroll-to="section-about">
+                            <span class="header-page_text" >Редактировать товары</span>
+                        </a>
+                    </li>
+                    <li class="header-page_li">
+                        <a class="header-page_link" href="/admin/admin-orders" data-scroll-to="section-contacts">
+                            <span class="header-page_text">Заказы</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div sec:authorize="isAuthenticated()" class="header-page_li">
+                <a class="header-page_icon" href="/cabinet/personal-information">
+                    <i class="fas fa-user-circle fa-lg blackiconcolor"></i>
+                </a>
+            </div>
+            <div sec:authorize="isAuthenticated()" class="header-page_li">
+                <a class="header-page_icon" href="/basket">
+                    <i class="fas fa-shopping-basket fa-lg blackiconcolor"></i>
+                </a>
+            </div>
+            <div sec:authorize="hasRole('ADMIN')" class="header-page_li">
+                <a class="header-page_icon" href="/admin/edit-bait">
+                    <i class="fas fa-cog fa-lg blackiconcolor"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</header>
+<!-- /.header-page -->
+<br><br><br><br>
+
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item" th:each="el : ${Receipt}">
+        <h2 class="accordion-header" th:id="'headin' + ${el.getReceipt_id()}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${el.getReceipt_id()}" aria-expanded="true" th:aria-controls="'collapse' + ${el.getReceipt_id()}">
+                <div class="row">
+                    <div class="">
+                        <div class="form-group">
+                            <label style="font-size: 13px;" for="status_order" th:text="'№' + ${el.getReceipt_id()}"></label>
+                            <p style="margin-bottom: 0px;" id="status_order" th:text="${el.getStatus()}"></p>
+                        </div>
+                    </div>
+                </div>
+            </button>
+        </h2>
+        <div th:id="'collapse' + ${el.getReceipt_id()}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <h4>Данные клиента</h4>
+                <div class="row">
+                    <div class="col-md-4 col-sm-1">
+                        <div class="form-group">
+                            <label for="form_name">Имя </label>
+                            <p id="form_name" th:text="${el.getName()}"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-2">
+                        <div class="form-group">
+                            <label for="form_surname">Фамилия </label>
+                            <p id="form_surname" th:text="${el.getSurname()}"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-3">
+                        <div class="form-group">
+                            <label for="form_patronymic">Отчество </label>
+                            <p id="form_patronymic" th:text="${el.getPatronymic()}"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-1">
+                        <div class="form-group">
+                            <label for="form_city">Город </label>
+                            <p id="form_city"th:text="${el.getCity()}"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-2">
+                        <div class="form-group">
+                            <label for="form_telephone">Телефон </label>
+                            <p id="form_telephone" th:text="${el.getTelephone()}"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Данные доставки</h4>
+                <div class="row">
+                    <div class="col-md-4 col-sm-1">
+                        <div class="form-group">
+                            <label for="form_delivery">Доставка </label>
+                            <p id="form_delivery" th:text="${el.getDelivery().getDelivery_service()}"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-2">
+                        <div class="form-group">
+                            <label for="form_delivery_info">Адрес отделения </label>
+                            <p id="form_delivery_info"th:text="${el.getDelivery().getDelivery_info()}"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-3">
+                        <div class="form-group">
+                            <label for="form_payment">Оплата </label>
+                            <p id="form_payment" th:text="${el.getPayment()}"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Товары</h4>
+                <div class="row" th:each="el1 : ${el.getProductBaskets()}">
+                    <div class="col-lg-3 col-sm-1 col-xs-12" style="height: 100px; line-height: 100px;">
+                        <img th:src="${el1.getPath_to_file()}" style="width: 80px; height: 80px;" />
+                    </div>
+
+                    <div  class="col-lg-3 col-sm-2 col-xs-12 mob-fix" style="height: 100px; line-height: 100px;" th:text="${el1.getName()}">
+                    </div>
+
+                    <div class="col-lg-2 col-sm-3 col-xs-12 mob-fix" style="height: 100px; line-height: 100px;"th:text="${el1.getCount()}">
+                    </div>
+
+                    <div class="col-lg-1 col-sm-2 col-xs-12 mob-fix" style="height: 100px; line-height: 100px;" th:text="${el1.getCount_price()} + ' грн'">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label mr-2">Сумма заказа:</label>
+                    <div class="col-1">
+                        <p class="form-control-plaintext" th:text="${el.getPrice()} + ' грн'"></p>
+                    </div>
+
+                    <form action="/admin/admin-orders" method="post">
+                        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
+                        <input th:name="id_receipt" th:value="${el.getReceipt_id()}" type="hidden">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Статус заказа </label>
+                                <select class="form-select" name="status" aria-label="status">
+                                    <option value="В обработке">В обработке</option>
+                                    <option value="Принят к исполнению">Принят к исполнению</option>
+                                    <option value="Отправлен">Отправлен</option>
+                                    <option value="Выполнен">Выполнен</option>
+                                    <option value="Отменен">Отменен</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn cabinet_btn" type="submit">Сохранить</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="JavaScript/project.js" defer></script>
+
+</body>
+</html>

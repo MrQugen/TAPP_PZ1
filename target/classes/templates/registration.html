@@ -1,0 +1,140 @@
+<!doctype HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
+
+    <title>Crazy fish</title>
+</head>
+<body>
+
+<style>
+    .form-width {max-width: 25rem;}
+    .has-float-label {
+        position: relative; }
+    .has-float-label label {
+        position: absolute;
+        left: 0;
+        top: 0;
+        cursor: text;
+        font-size: 75%;
+        opacity: 1;
+        -webkit-transition: all .2s;
+        transition: all .2s;
+        top: -.5em;
+        left: 0.75rem;
+        z-index: 3;
+        line-height: 1;
+        padding: 0 1px; }
+    .has-float-label label::after {
+        content: " ";
+        display: block;
+        position: absolute;
+        background: white;
+        height: 2px;
+        top: 50%;
+        left: -.2em;
+        right: -.2em;
+        z-index: -1; }
+    .has-float-label .form-control::-webkit-input-placeholder {
+        opacity: 1;
+        -webkit-transition: all .2s;
+        transition: all .2s; }
+    .has-float-label .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
+        opacity: 0; }
+    .has-float-label .form-control:placeholder-shown:not(:focus) + label {
+        font-size: 150%;
+        opacity: .5;
+        top: .3em; }
+
+    .input-group .has-float-label {
+        display: table-cell; }
+    .input-group .has-float-label .form-control {
+        border-radius: 0.25rem; }
+    .input-group .has-float-label:not(:last-child) .form-control {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0; }
+    .input-group .has-float-label:not(:first-child) .form-control {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        margin-left: -1px; }
+    .btn-primary {
+        color: #fff;
+        background-color: #a72d6c;
+        border-color: #a72d6c;
+    }
+    .btn-primary:hover{
+        color: #fff;
+        background-color: #d43c8c;
+        border-color: #d43c8c;
+    }
+
+    .text-primary{
+        color: #a72d6c!important;
+    }
+    .bg-primary {
+        background-color: #a72d6c!important;
+    }
+    .form-control-input:checked {
+        background-color: #a72d6c;
+        border-color: #a72d6c;
+    }
+</style>
+
+
+<div class="p-x-1 p-y-3">
+    <form action="/registration" method="post" class="card card-block m-x-auto bg-faded form-width">
+        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
+        <legend class="m-b-1 text-xs-center">Регистрация</legend>
+
+        <div class="form-group has-float-label">
+            <input class="form-control" id="name" name="name" type="text" placeholder="Имя"/>
+            <label for="name">Имя</label>
+            <div class="form-group"></div>
+        </div>
+
+        <div class="form-group has-float-label">
+            <input class="form-control" id="surname" name="surname" type="text" placeholder="Фамилия"/>
+            <label for="surname">Фамилия</label>
+            <div class="form-group"></div>
+        </div>
+
+        <div class="form-group has-float-label">
+            <input class="form-control" id="patronymic" name="patronymic" type="text" placeholder="Отчество"/>
+            <label for="patronymic">Отчество</label>
+            <div class="form-group"></div>
+        </div>
+
+        <div class="form-group has-float-label">
+            <input class="form-control" id="city" name="city" type="text" placeholder="Город"/>
+            <label for="city">Город</label>
+            <div class="form-group"></div>
+        </div>
+
+        <div class="form-group has-float-label">
+            <input class="form-control" id="telephone" name="telephone" type="text" placeholder="Телефон"/>
+            <label for="telephone">Телефон</label>
+            <div class="form-group"></div>
+        </div>
+
+        <div class="form-group input-group">
+            <span class="input-group-addon">@</span>
+            <span class="has-float-label">
+ <input class="form-control" id="email" type="email" name="email" placeholder="name@example.com"/>
+ <label for="email">E-mail</label>
+ </span>
+        </div>
+        <div class="form-group has-float-label">
+            <input class="form-control" id="password" name="password" type="password" placeholder="••••••••"/>
+            <label for="password">Пароль</label>
+            <div class="form-group"></div>
+        </div>
+        <div class="text-xs-center">
+            <button class="btn btn-block btn-primary" type="submit">Регистрация</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
